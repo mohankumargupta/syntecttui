@@ -111,16 +111,16 @@ fn ui<B: Backend>(f: &mut Frame<B>, app: &App) {
     //let simpleservice = "[Unit]\nDescription=boo\n\n\n[Install]".to_string();
 
     let simpleservice = r#"
-    [Unit]
-    Description=jgjg
-    After=jkhk
-    Wants=jgj
+[Unit]
+Description=jgjg
+After=jkhk
+Wants=jgj
 
-    # This is a comment
+# This is a comment
 
-    [Install]
-    WantedBy=boo
-    "#
+[Install]
+WantedBy=boo
+"#
     .to_owned();
 
     /*

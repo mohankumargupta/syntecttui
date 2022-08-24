@@ -44,12 +44,15 @@ impl<'a> SyntaxText<'a> {
         //let mut state = ParseState::new(syntax_set.find_syntax_by_extension("ini").unwrap());
         //let theme = ThemeSet::get_theme("src/resources/monokai/monokai.tmTheme").unwrap();
         //let theme_set: ThemeSet = ThemeSet::load_defaults();
+
         let theme_set = ThemeSet::load_from_folder("src/resources/monokai").unwrap();
+
         //let highlighter = Highlighter::new(&theme_set.themes["Solarized (dark)"]);
         let highlighter = Highlighter::new(&theme_set.themes["monokai"]);
         let mut highlight_state = HighlightState::new(&highlighter, ScopeStack::new());
 
-        let syntax = syntax_set.find_syntax_by_extension("ini").unwrap();
+        //let syntax = syntax_set.find_syntax_by_extension("ini").unwrap();
+        let syntax = syntax_set.find_syntax_by_extension("editorconfig").unwrap();
         let mut h = HighlightLines::new(syntax, &theme_set.themes["monokai"]);
 
         let syntax_lines: &mut Vec<SyntaxLine<'a>> = &mut Vec::new();

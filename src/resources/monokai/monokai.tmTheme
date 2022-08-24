@@ -28,13 +28,39 @@
 			<key>name</key>
 			<string>Section Header</string>
 			<key>scope</key>
-			<string>punctuation.definition.section.begin.ini,punctuation.definition.section.end.ini,meta.section.ini</string>
+			<string>entity.name.section.group-title.ini</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
 				<string>#F92672</string>
 			</dict>
 		</dict>	
+
+		<dict>
+			<key>name</key>
+			<string>INI key mapping</string>
+			<key>scope</key>
+			<string>keyword.other.definition.ini</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#A6E22E</string>
+			</dict>
+		</dict>	
+
+		<dict>
+			<key>name</key>
+			<string>Unquoted String</string>
+			<key>scope</key>
+			<string>string.unquoted.ini</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#AE81FF</string>
+			</dict>
+		</dict>	
+
+
 		<dict>
 			<key>name</key>
 			<string>Value Value ini</string>
@@ -50,11 +76,11 @@
 			<key>name</key>
 			<string>Equals ini separator</string>
 			<key>scope</key>
-			<string>punctuation.separator</string>
+			<string>punctuation.separator.key-value.ini</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#F92672</string>
+				<string>#AE81FF</string>
 			</dict>
 		</dict>				
 		<dict>
