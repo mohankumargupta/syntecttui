@@ -1,11 +1,6 @@
 mod syntax_test;
 use syntax_test::SyntaxText;
 
-use syntect::easy::HighlightLines;
-use syntect::highlighting::ThemeSet;
-use syntect::parsing::SyntaxSet;
-//use syntect::util::{as_24_bit_terminal_escaped, LinesWithEndings};
-
 use crossterm::{
     event::{self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode},
     execute,
@@ -21,7 +16,7 @@ use tui::{
     backend::{Backend, CrosstermBackend},
     layout::{Alignment, Constraint, Direction, Layout},
     style::{Color, Modifier, Style},
-    text::{Span, Spans},
+    text::Span,
     widgets::{Block, Borders, Paragraph},
     Frame, Terminal,
 };
@@ -113,10 +108,9 @@ fn ui<B: Backend>(f: &mut Frame<B>, app: &App) {
         .constraints([Constraint::Percentage(100)].as_ref())
         .split(size);
 
-    let simpleservice = "[Unit]\nDescription=boo\n\n\n[Install]".to_string();
+    //let simpleservice = "[Unit]\nDescription=boo\n\n\n[Install]".to_string();
 
-    /*
-        let simpleservice = r#"
+    let simpleservice = r#"
     [Unit]
     description=jgjg
     after=jkhk
@@ -127,15 +121,7 @@ fn ui<B: Backend>(f: &mut Frame<B>, app: &App) {
     [Install]
     wantedby=boo
     "#
-        .to_string();
-    */
-    let ps = SyntaxSet::load_defaults_newlines();
-    let ts = ThemeSet::load_defaults();
-
-    let syntax = ps.find_syntax_by_extension("rs").unwrap();
-    let mut h = HighlightLines::new(syntax, &ts.themes["base16-ocean.dark"]);
-    let s = "pub struct Wow { hi: u64 }\nfn blah() -> u64 {}".to_string();
-    let mut escaped = "".to_string();
+    .to_owned();
 
     /*
     for line in LinesWithEndings::from(s) {
@@ -144,30 +130,7 @@ fn ui<B: Backend>(f: &mut Frame<B>, app: &App) {
     }
     */
 
-    let boo = SyntaxText::new(simpleservice);
-
-    let text = vec![
-        Spans::from("This is a line "),
-        Spans::from(Span::styled(
-            "This is a line   ",
-            Style::default().fg(Color::Red),
-        )),
-        Spans::from(Span::styled(
-            "This is a line",
-            Style::default().bg(Color::Blue),
-        )),
-        Spans::from(Span::styled(
-            "This is a longer line",
-            Style::default().add_modifier(Modifier::CROSSED_OUT),
-        )),
-        Spans::from(Span::styled(&long_line, Style::default().bg(Color::Green))),
-        Spans::from(Span::styled(
-            "This is a line",
-            Style::default()
-                .fg(Color::Green)
-                .add_modifier(Modifier::ITALIC),
-        )),
-    ];
+    let boo = SyntaxText::new(&simpleservice);
 
     let create_block = |title| {
         Block::default()

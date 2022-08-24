@@ -31,7 +31,7 @@ pub struct SyntaxText<'a> {
 }
 
 impl<'a> SyntaxText<'a> {
-    pub fn new(text: String) -> Self {
+    pub fn new(text: &'a String) -> Self {
         //let syntax_set: SyntaxSet = SyntaxSet::load_defaults_nonewlines();
         //let syntax_set: SyntaxSet = SyntaxSet::load_from_folder("src/resources").unwrap();
         let mut builder = SyntaxSetBuilder::new();
@@ -50,45 +50,15 @@ impl<'a> SyntaxText<'a> {
 
         let syntax_lines: &mut Vec<SyntaxLine<'a>> = &mut Vec::new();
 
-        let mut textcopy = text.clone();
-
-        for line in LinesWithEndings::from(Self::string_to_static_str(text)) {
+        for line in LinesWithEndings::from(&text) {
             let ranges: Vec<(Style, &str)> = h.highlight_line(line, &syntax_set).unwrap();
             syntax_lines.push(SyntaxLine { items: ranges });
         }
 
         Self {
-            text: textcopy,
+            text: text.clone(),
             lines: syntax_lines.clone(),
         }
-
-        /*
-        let mut syntax_lines: Vec<SyntaxLine> = Vec::new();
-        let mut highlight_state = HighlightState::new(&highlighter, ScopeStack::new());
-
-        for (number, line) in text.lines().enumerate() {
-            let ops = state.parse_line(line, &syntax_set).unwrap();
-            //let ops = state.parse_line(line, &syntax_set);
-
-            let iter =
-                RangedHighlightIterator::new(&mut highlight_state, &ops[..], line, &highlighter);
-
-            syntax_lines.push(SyntaxLine {
-                items: iter
-                    .map(|(style, _, range)| (style, number, range))
-                    .collect(),
-            });
-        }
-
-        Self {
-            text,
-            lines: syntax_lines,
-        }
-        */
-    }
-
-    fn string_to_static_str(s: String) -> &'static str {
-        Box::leak(s.into_boxed_str())
     }
 
     pub fn convert(&self) -> tui::text::Text<'_> {
