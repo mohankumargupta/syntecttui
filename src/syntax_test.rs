@@ -26,7 +26,7 @@ pub struct SyntaxLine<'a> {
 }
 
 pub struct SyntaxText<'a> {
-    pub text: String,
+    pub text: &'a String,
     pub lines: Vec<SyntaxLine<'a>>,
 }
 
@@ -56,7 +56,7 @@ impl<'a> SyntaxText<'a> {
         }
 
         Self {
-            text: text.clone(),
+            text: text,
             lines: syntax_lines.clone(),
         }
     }
