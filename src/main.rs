@@ -99,7 +99,7 @@ fn ui<B: Backend>(f: &mut Frame<B>, app: &App) {
     let mut long_line = s.repeat(usize::from(size.width) / s.len() + 4);
     long_line.push('\n');
 
-    let block = Block::default().style(Style::default().bg(Color::White).fg(Color::Black));
+    let block = Block::default().style(Style::default().bg(Color::Black).fg(Color::White));
     f.render_widget(block, size);
 
     let chunks = Layout::default()
@@ -112,14 +112,14 @@ fn ui<B: Backend>(f: &mut Frame<B>, app: &App) {
 
     let simpleservice = r#"
     [Unit]
-    description=jgjg
-    after=jkhk
-    wants=jgj
+    Description=jgjg
+    After=jkhk
+    Wants=jgj
 
     # This is a comment
 
     [Install]
-    wantedby=boo
+    WantedBy=boo
     "#
     .to_owned();
 
@@ -135,7 +135,7 @@ fn ui<B: Backend>(f: &mut Frame<B>, app: &App) {
     let create_block = |title| {
         Block::default()
             .borders(Borders::ALL)
-            .style(Style::default().bg(Color::White).fg(Color::Black))
+            .style(Style::default().bg(Color::Black).fg(Color::White))
             .title(Span::styled(
                 title,
                 Style::default().add_modifier(Modifier::BOLD),
@@ -143,7 +143,7 @@ fn ui<B: Backend>(f: &mut Frame<B>, app: &App) {
     };
 
     let paragraph = Paragraph::new(boo.convert())
-        .style(Style::default().bg(Color::White).fg(Color::Black))
+        .style(Style::default().bg(Color::Black).fg(Color::White))
         .block(create_block("Left, no wrap"))
         .alignment(Alignment::Left);
     f.render_widget(paragraph, chunks[0]);
